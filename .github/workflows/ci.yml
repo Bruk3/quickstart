@@ -50,6 +50,8 @@ jobs:
             --build-arg GITHUB_REF="$GITHUB_REF" \
             .
 
+          docker push gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
+
       # Set up kustomize
       - name: Set up Kustomize
         run: |-
