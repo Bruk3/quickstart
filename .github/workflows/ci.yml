@@ -48,6 +48,7 @@ jobs:
             --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" \
+            .
 
       # Set up kustomize
       - name: Set up Kustomize
