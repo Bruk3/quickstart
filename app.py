@@ -16,7 +16,8 @@ def fetch_quote():
 
 
 @app.route('/')
-def hello_world():
+def home():
+    print("in home")
     return render_template('home.html')
 
 @app.route('/quote')
@@ -33,4 +34,4 @@ def get_quote():
 
 
 if __name__ == "__main__":
-    app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8082)))
+    app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
