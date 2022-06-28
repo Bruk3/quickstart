@@ -20,7 +20,8 @@ def fetch_quote():
 def fetch_weather(day):
     contents = urllib.request.urlopen(
         "http://{FORECAST_SERVICE_URL}/api/{day}".format(
-           FORECAST_SERVICE_URL=FORECAST_SERVICE_URL 
+           FORECAST_SERVICE_URL=FORECAST_SERVICE_URL, 
+           day=day
         )
     ).read()
 
