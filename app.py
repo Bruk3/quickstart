@@ -10,7 +10,7 @@ PORT = os.environ.get("QUOTE_SERVICE_PORT")
 
 def fetch_quote():
     contents = urllib.request.urlopen(
-            "http://{QUOTE_SERVICE_URL}:{PORT}/randomquote".format(
+            "http://{QUOTE_SERVICE_URL}:{PORT}/api/quote".format(
                 QUOTE_SERVICE_URL=QUOTE_SERVICE_URL,
                 PORT=PORT
             )

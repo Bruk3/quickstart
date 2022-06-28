@@ -11,8 +11,8 @@ env:
   PROJECT_ID: '${{ secrets.GKE_PROJECT_ID }}'
   GKE_CLUSTER: onlineboutique    # Add your cluster name here.
   GKE_ZONE: us-central1-b   # Add your cluster zone here.
-  IMAGE: helloworld-gke
-  DEPLOYMENT_NAME: helloworld-gke
+  IMAGE: quickstart
+  DEPLOYMENT_NAME: quickstart
   # DEPLOY_ENV: dev
 
 
@@ -66,6 +66,7 @@ jobs:
           ./kustomize build . | kubectl apply -f -
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
+          kubectl get services
       
 
 

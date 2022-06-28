@@ -15,7 +15,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: helloworld-gke
+  name: quickstart
 spec:
   replicas: 1
   selector:
@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: hello-app
-        #image: gcr.io/cicd-playground-354219/helloworld-gke
+        #image: gcr.io/cicd-playground-354219/quickstart
         image: gcr.io/PROJECT_ID/IMAGE:TAG
         # This app listens on port 8080 for web traffic by default.
         ports:
@@ -40,11 +40,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello
+  name: quickstart
 spec:
   type: LoadBalancer
   selector:
-    app: hello
+    app: quickstart
   ports:
   - port: 80
     targetPort: 8080

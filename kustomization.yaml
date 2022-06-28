@@ -6,5 +6,3 @@ resources:
 
 images:
 - name: gcr.io/PROJECT_ID/IMAGE:TAG
-  newName: gcr.io/cicd-playground-354219/helloworld-gke
-  newTag: f3398df2
