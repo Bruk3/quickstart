@@ -6,13 +6,11 @@ from flask import Flask, render_template
 app = Flask(__name__, template_folder='templates')
 
 QUOTE_SERVICE_URL = os.environ.get("QUOTE_SERVICE_URL")
-PORT = os.environ.get("QUOTE_SERVICE_PORT")
 
 def fetch_quote():
     contents = urllib.request.urlopen(
-            "http://{QUOTE_SERVICE_URL}:{PORT}/api/quote".format(
-                QUOTE_SERVICE_URL=QUOTE_SERVICE_URL,
-                PORT=PORT
+            "http://{QUOTE_SERVICE_URL}/api/quote".format(
+                QUOTE_SERVICE_URL=QUOTE_SERVICE_URL
             )
         ).read()
 
@@ -24,7 +22,9 @@ def hello_world():
 @app.route('/quote')
 def get_quote():
     print ("Printing Quote of the Day")
-    # quote = fetch_quote()
+    print ("Fetching quote")
+    quote = fetch_quote()
+    print("Fetched quote: ", quote)
     return render_template(
             'home.html', 
             quote="People say nothing is impossible, but I do nothing every day.",
