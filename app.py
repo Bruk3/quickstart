@@ -18,12 +18,15 @@ def fetch_quote():
     return json.loads(contents)
 
 def fetch_weather(day):
-    contents = urllib.request.urlopen(
-        "http://{FORECAST_SERVICE_URL}/api/{day}".format(
-           FORECAST_SERVICE_URL=FORECAST_SERVICE_URL, 
-           day=day
-        )
-    ).read()
+    url =  "http://{FORECAST_SERVICE_URL}/api/{day}".format(
+                FORECAST_SERVICE_URL=FORECAST_SERVICE_URL, 
+                day=day
+    )
+    print("url::start")
+    print(url)
+    print("url::done")
+
+    contents = urllib.request.urlopen(url).read()
 
     return json.loads(contents)
 
@@ -66,4 +69,4 @@ def get_weather_tomorrow():
     )
 
 if __name__ == "__main__":
-    app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
+    app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8084)))
