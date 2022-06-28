@@ -1,13 +1,34 @@
 <!doctype html>
 <html>
 <head>
-<title>Our Funky HTML Page</title>
+<title>Our Simple HTML Page </title>
 <meta name="description" content="Our first page">
 <meta name="keywords" content="html tutorial template">
 </head>
 <body style="background-color: aqua;">
 
     <h1> Super Simple Microservice Application </h1>
+
+
+    <h3> Your Random Quote Generator </h3>
+
+    <a href="{{ url_for ('get_quote') }}">
+    <button type="button">Get New Quote</button>
+    </a>
+
+
+
+    {% if quote %}
+        <div>
+        <p> Today's quote of the day is as follows: </p>
+            <p> {{ by }} </p>
+            <p> 
+                {{ quote }} 
+            </p>
+        </div>
+
+    {% endif %}
+
 
 </body>
 </html>
