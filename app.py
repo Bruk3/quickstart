@@ -7,6 +7,7 @@ from flask import Flask, render_template
 app = Flask(__name__, template_folder='templates')
 
 QUOTE_SERVICE_URL = os.environ.get("QUOTE_SERVICE_URL")
+FORECAST_SERVICE_URL = os.environ.get("FORECAST_SERVICE_URL")
 
 def fetch_quote():
     contents = urllib.request.urlopen(
@@ -16,18 +17,24 @@ def fetch_quote():
         ).read()
     return json.loads(contents)
 
+def fetch_weather(day):
+    contents = urllib.request.urlopen(
+        "http://{FORECAST_SERVICE_URL}/api/{day}".format(
+           FORECAST_SERVICE_URL=FORECAST_SERVICE_URL 
+        )
+    ).read()
+
+    return json.loads(contents)
+
+
 
 @app.route('/')
 def home():
-    print("in home")
     return render_template('home.html')
 
 @app.route('/quote')
 def get_quote():
-    print ("Printing Quote of the Day")
-    print ("Fetching quote")
     quote = fetch_quote()
-    print("Fetched quote: ", quote)
     return render_template(
         'home.html',
         quote=quote["quote"],
@@ -39,6 +46,23 @@ def get_quote():
             by="Winnie the Pooh"
         )
 
+@app.route('/weather/today')
+def get_weather_today():
+    weather = fetch_weather("today")
+    return render_template(
+        'home.html', 
+        day = "today"
+        weather = weather
+    )
+
+@app.route('/weather/tomorrow')
+def get_weather_tomorrow():
+    weather = fetch_weather("tomorrow")
+    return render_template(
+        'home.html', 
+        day = "tomorrow"
+        weather = weather
+    )
 
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))

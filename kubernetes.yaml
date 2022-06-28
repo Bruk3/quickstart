@@ -38,6 +38,8 @@ spec:
             value: "8080"
           - name: QUOTE_SERVICE_URL
             value: "simple-quotes:5000"
+          - name: FORECAST_SERVICE_URL
+            value: "simple-forecast:6000"
 ---
 apiVersion: v1
 kind: Service

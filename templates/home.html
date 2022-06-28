@@ -22,15 +22,36 @@
         <div>
         <p> Today's quote of the day is as follows: </p>
             <br> <br>
-            <p> <b> {{ by }} <b> </b></p>
+            <p> <b> {{ by }} </b></p>
             <p style="font-family:Gothic; font-weight: bolder; font-size: 20px"> 
-                U+201C {{ quote }} U+201D
+                {{ quote }}
             </p>
         </div>
 
     {% endif %}
 
+    <h3> Your Weather Forecast </h3>
 
+    <a href="{{ url_for ('get_weather_today') }}">
+    <button type="button"> Today </button>
+    </a>
+
+    <a href="{{ url_for ('get_weather_tomorrow') }}">
+    <button type="button"> Tomorrow's Forecast </button>
+    </a>
+
+
+    {% if weather %}
+    <div>
+    <p> The weather for {{ day }} is as follows: </p>
+        <br> <br>
+        <p> <b> {{ by }} </b></p>
+        <p style="font-family:Gothic; font-weight: bolder; font-size: 20px"> 
+            {{ quote }}
+        </p>
+    </div>
+
+    {% endif %}
 </body>
 </html>
 
