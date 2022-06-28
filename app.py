@@ -44,12 +44,7 @@ def get_quote():
         quote=quote["quote"],
         by=quote["by"]
     )
-    return render_template(
-            'home.html', 
-            quote="People say nothing is impossible, but I do nothing every day.",
-            by="Winnie the Pooh"
-        )
-
+    
 @app.route('/weather/today')
 def get_weather_today():
     weather = fetch_weather("today")
