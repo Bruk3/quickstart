@@ -51,8 +51,8 @@ def get_weather_today():
     weather = fetch_weather("today")
     return render_template(
         'home.html', 
-        day = "today"
-        weather = weather
+        day="today",
+        weather=weather
     )
 
 @app.route('/weather/tomorrow')
@@ -60,8 +60,8 @@ def get_weather_tomorrow():
     weather = fetch_weather("tomorrow")
     return render_template(
         'home.html', 
-        day = "tomorrow"
-        weather = weather
+        day="tomorrow",
+        weather=weather
     )
 
 if __name__ == "__main__":

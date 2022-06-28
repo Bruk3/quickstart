@@ -44,12 +44,21 @@
     {% if weather %}
     <div>
     <p> The weather for {{ day }} is as follows: </p>
-        <br> <br>
-        <p> <b> {{ by }} </b></p>
-        <p style="font-family:Gothic; font-weight: bolder; font-size: 20px"> 
-            {{ quote }}
-        </p>
+    <table>
+        <tr>
+          <th>Temperature</th>
+          <th>Precipitation</th>
+          <th>Wind</th>
+        </tr>
+        <tr>
+          <td> {{ weather.Temperature }} </td>
+          <td> {{ weather.Precipitation }} </td>
+          <td> {{ weather.Wind }} </td>
+        </tr>
+      </table>
     </div>
+
+    <h2> {{ weather.comment }} </h2>
 
     {% endif %}
 </body>
