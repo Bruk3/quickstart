@@ -9,14 +9,18 @@ on:
 
 env:
   PROJECT_ID: '${{ secrets.GKE_PROJECT_ID }}'
-  GKE_CLUSTER: onlineboutique    # Add your cluster name here.
-  GKE_ZONE: us-central1-b   # Add your cluster zone here.
+  GKE_CLUSTER: demo   # Add your cluster name here.
+  GKE_ZONE: us-central1   # Add your cluster zone here.
   IMAGE: quickstart
   DEPLOYMENT_NAME: quickstart
   # DEPLOY_ENV: dev
 
 
 jobs:
+  job_id:
+      permissions:
+        contents: 'read'
+        id-token: 'write'
   build-publish-image:
     name: Build and publish image
     runs-on: ubuntu-latest
@@ -29,14 +33,22 @@ jobs:
         with: 
           args: "--max-line-length=100 --exclude .ipython --ignore E266,W503"
 
-      # Setup gcloud CLI
-      - uses: google-github-actions/setup-gcloud@94337306dda8180d967a56932ceb4ddcf01edae7
-        with:
-          service_account_key: ${{ secrets.GKE_SA_KEY }}
-          project_id: ${{ env.PROJECT_ID }}
 
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0.4.0'
+        with:
+          workload_identity_provider: 'projects/925595890819/locations/global/workloadIdentityPools/wi-pool/providers/wi-pool'
+          service_account: 'cicd-demo@jkwng-gae-flex3.iam.gserviceaccount.com'
     
       - run: gcloud --quiet auth configure-docker
+
+
+      - id: 'get-gke-credentials'
+        uses: 'google-github-actions/get-gke-credentials@v0'
+        with:
+          cluster_name: ${{ env.GKE_CLUSTER }}
+          location: ${{ env.GKE_ZONE }}
 
 
       # Get the GKE credentials so we can deploy to the cluster
@@ -44,7 +56,6 @@ jobs:
         with:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GKE_ZONE }}
-          credentials: ${{ secrets.GKE_SA_KEY }}
 
           # Build the Docker image
       - name: Build
