@@ -17,9 +17,6 @@ env:
 
 
 jobs:
-      permissions:
-        contents: 'read'
-        id-token: 'write'
   build-publish-image:
     name: Build and publish image
     runs-on: ubuntu-latest
