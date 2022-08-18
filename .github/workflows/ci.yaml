@@ -38,7 +38,7 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v0.4.0'
         with:
-          token_format: access_token
+          token_format: 'access_token'
           workload_identity_provider: 'projects/925595890819/locations/global/workloadIdentityPools/wi-pool/providers/wi-pool'
           service_account: 'cicd-demo@jkwng-gae-flex3.iam.gserviceaccount.com'
 
@@ -84,5 +84,16 @@ jobs:
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
       
-
-
+  slack-workflow-status:
+    if: always()
+    name: Post Workflow Status To Slack
+    needs:
+      - build-publish-image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slack Workflow Notification
+        uses: Gamesight/slack-workflow-status@master
+        with:
+          # Required Input
+          repo_token: ${{secrets.GITHUB_TOKEN}}
+          slack_webhook_url: ${{secrets.SLACK_WEBHOOK}}
