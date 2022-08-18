@@ -38,7 +38,7 @@ def fetch_cool():
         COOL_SERVICE_URL=COOL_SERVICE_URL
     )
     contents = urllib.request.urlopen(url).read()
-    return json.loads(contents)
+    return contents
 
 
 @app.route("/cool")
