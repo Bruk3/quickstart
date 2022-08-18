@@ -32,6 +32,7 @@ def fetch_weather(day):
 
     return json.loads(contents)
 
+
 def fetch_cool():
     url = "https://{COOL_SERVICE_URL}/".format(
         COOL_SERVICE_URL=COOL_SERVICE_URL
@@ -40,10 +41,11 @@ def fetch_cool():
     return json.loads(contents)
 
 
-@app.route("/cool"):
+@app.route("/cool")
 def get_cool():
     cool = fetch_cool()
     return render_template("home.html", cool=cool)
+
 
 @app.route("/")
 def home():
