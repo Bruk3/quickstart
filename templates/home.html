@@ -62,6 +62,17 @@
     <h2> {{ weather.comment }} </h2>
 
     {% endif %}
+
+    {% if cool %}
+    <h1 style="color: blue"> 
+      {{ cool }}
+    </h1>
+    {% else %}
+      <a href="{{ url_for ('get_cool') }}">
+      <button type="button"> Invoke the cool service </button>
+      </a>
+    {% endif %}
+
 </body>
 </html>
 

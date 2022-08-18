@@ -40,6 +40,8 @@ spec:
             value: "simple-quotes:5000"
           - name: FORECAST_SERVICE_URL
             value: "simple-forecast:6000"
+          - name: COOL_SERVICE_URL
+            value: "jkwng-gae-flex3.uc.r.appspot.com"
 ---
 apiVersion: v1
 kind: Service
